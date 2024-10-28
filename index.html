@@ -1,0 +1,2136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cell Bio Exam 3 Practice</title>
+
+    <style>
+        /* Importing Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+        }
+
+        /* Container for Quiz */
+        #quiz {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        /* Card Style for Questions */
+        .question {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .question h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        /* Styled list for options */
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .options li {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            background-color: #f0f4f8;
+            padding: 10px;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .options li:hover {
+            background-color: #d1e8ff;
+        }
+
+        /* Button Style */
+        .btn {
+            display: block;
+            width: 100%;
+            max-width: 250px;
+            margin: 30px auto;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #3498db, #8e44ad);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #6d42b6;
+            transform: translateY(-5px);
+        }
+
+.correct {
+    color: green;
+    font-weight: bold;
+}
+
+.incorrect {
+    color: red;
+    font-weight: bold;
+}
+
+        /* Feedback Styles */
+        #result {
+            font-size: 1.2em;
+            text-align: center;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+
+        #result.visible {
+            opacity: 1;
+        }
+
+        /* Responsive for smaller screens */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Cell Bio Exam 3 Practice</h1>
+    <div id="quiz"></div>
+    <button class="btn" onclick="checkAnswers()">Submit</button>
+    <div id="result"></div>
+
+    <script>
+         const questions = [
+         {
+    question: "Which of the following best explains the inefficiency of photosynthesis, despite being essential for life on Earth?",
+    options: [
+        "A) Plants use less than 1% of the available light energy for photosynthesis due to high rates of respiration.",
+        "B) Photosynthesis only occurs in certain pigments, limiting light absorption across the spectrum.",
+        "C) Most plants can only utilize the green light spectrum, reducing the energy they capture.",
+        "D) Only 3-6% of the light energy that reaches plants is used in photosynthesis, with most being reflected or lost as heat."
+    ],
+    correct: 3
+},
+{
+    question: "In C4 plants, CO2 is initially fixed into a four-carbon compound. Which of the following accurately describes the key steps that occur in this process and the advantage it provides?",
+    options: [
+        "A) CO2 is fixed into oxaloacetate in the spongy mesophyll, which is transported to bundle sheath cells where it is released as CO2 for the Calvin cycle, reducing water loss.",
+        "B) CO2 is fixed into malate in the palisade mesophyll, transported to the stroma where it is converted to pyruvate for enhanced ATP production.",
+        "C) CO2 is fixed into pyruvate in the spongy mesophyll and stored as oxaloacetate in bundle sheath cells for later release, increasing photosynthetic efficiency under high water availability.",
+        "D) CO2 is stored as oxaloacetate in bundle sheath cells to be used during photorespiration, preventing rubisco from binding O2 under low water conditions."
+    ],
+    correct: 0
+},
+{
+    question: "Which of the following best describes the role of Rubisco during the Calvin Cycle, and why is it considered both essential and inefficient?",
+    options: [
+        "A) Rubisco catalyzes the fixation of oxygen into ribulose-1,5-bisphosphate during high CO2 conditions, increasing the rate of glucose production.",
+        "B) Rubisco catalyzes the reduction of NADP+ to NADPH, enabling high rates of ATP production in the Calvin cycle under light-independent conditions.",
+        "C) Rubisco catalyzes the fixation of CO2 into ribulose-1,5-bisphosphate, forming 3-phosphoglycerate; however, it is slow and sometimes binds to oxygen, leading to photorespiration.",
+        "D) Rubisco catalyzes the splitting of water in the light reactions, driving electron transport and ATP formation in the Calvin cycle."
+    ],
+    correct: 2
+},
+{
+    question: "How does the wavelength of light affect the energy available for photosynthesis, and why do plants predominantly use red and blue light?",
+    options: [
+        "A) Shorter wavelengths, like red light, carry more energy than longer wavelengths, enabling plants to efficiently capture light in the blue and red spectra.",
+        "B) Longer wavelengths, like green light, are highly energetic but poorly absorbed, so plants rely on shorter red and blue wavelengths that match the energy needs of chlorophyll molecules.",
+        "C) Red and blue light wavelengths provide optimal energy levels for chlorophyll a and b, while green light is reflected, reducing light absorption and energy loss.",
+        "D) Blue light carries less energy than red light, but it is more easily absorbed by carotenoids, ensuring a constant energy supply."
+    ],
+    correct: 2
+},
+{
+    question: "Which process is responsible for creating the proton gradient in the light reactions of photosynthesis, and what is the significance of this gradient?",
+    options: [
+        "A) Water splitting in Photosystem II releases protons into the stroma, driving the production of NADPH.",
+        "B) The cytochrome complex pumps protons into the thylakoid lumen, establishing a proton gradient used to drive ATP synthesis.",
+        "C) Electrons passing through the electron transport chain drive protons into the thylakoid lumen, facilitating the generation of glucose during the Calvin cycle.",
+        "D) Photosystem I generates a proton gradient across the stroma that powers the formation of ATP by oxidizing NADPH."
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following is true regarding photorespiration, and why does it represent a major limitation for C3 plants?",
+    options: [
+        "A) Photorespiration occurs when Rubisco binds CO2 at high temperatures, leading to the production of oxygen and reduced carbon fixation efficiency.",
+        "B) Photorespiration increases oxygen consumption and reduces carbon fixation by Rubisco, causing a loss of energy and carbon in hot, dry conditions.",
+        "C) Photorespiration occurs in C3 plants when Rubisco binds to oxygen instead of CO2, releasing carbon dioxide and wasting energy, especially in high CO2 environments.",
+        "D) Photorespiration causes Rubisco to fix oxygen, resulting in increased glucose production and higher energy output in the Calvin cycle."
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following accurately describes the function of Photosystem I (PSI) and Photosystem II (PSII) in the light reactions of photosynthesis?",
+    options: [
+        "A) PSII captures light energy at 700 nm, exciting electrons that drive ATP synthesis, while PSI captures light at 680 nm, driving the formation of NADPH.",
+        "B) PSII captures light energy at 680 nm, exciting electrons that pass through the electron transport chain, while PSI captures light at 700 nm, producing NADPH through further electron excitation.",
+        "C) PSI captures light energy at 680 nm, exciting electrons that drive ATP synthesis, while PSII captures light at 700 nm to drive water splitting and oxygen release.",
+        "D) PSI and PSII both capture light at 680 nm and 700 nm, respectively, to produce ATP directly through electron transfer reactions."
+    ],
+    correct: 1
+},
+{
+    question: "During the Calvin cycle, how is ATP and NADPH produced in the light reactions utilized, and what is the fate of the fixed carbon?",
+    options: [
+        "A) ATP is used to regenerate ribulose-1,5-bisphosphate while NADPH reduces 3-phosphoglycerate to form glucose, which is then stored in the stroma.",
+        "B) ATP and NADPH are used to reduce 3-phosphoglycerate into glyceraldehyde-3-phosphate (G3P), with G3P being further processed into glucose or stored as starch.",
+        "C) ATP is used to regenerate glyceraldehyde-3-phosphate while NADPH reduces ribulose-1,5-bisphosphate to release fixed carbon as CO2.",
+        "D) ATP drives the regeneration of pyruvate from malate, while NADPH reduces CO2 into oxaloacetate in bundle sheath cells."
+    ],
+    correct: 1
+},
+{
+    question: "How do CAM plants adapt to arid environments, and what is the key metabolic distinction between CAM and C4 plants?",
+    options: [
+        "A) CAM plants open their stomata at night to fix CO2 into oxaloacetate, while C4 plants fix CO2 during the day into malate, which is stored in bundle sheath cells for later use.",
+        "B) CAM plants open their stomata at night to fix CO2 into malate, which is stored in acidic vacuoles and used during the day, whereas C4 plants fix CO2 into oxaloacetate in mesophyll cells and release it in bundle sheath cells.",
+        "C) CAM plants use malate to store CO2 in bundle sheath cells, which are used during the night, while C4 plants store CO2 as oxaloacetate during the day in the palisade mesophyll.",
+        "D) CAM plants utilize pyruvate during the night for glucose synthesis, while C4 plants store malate during the day for use in photosynthesis."
+    ],
+    correct: 1
+},
+{
+    question: "What is the main functional difference between C3 and C4 plants in their response to high temperatures and low water availability?",
+    options: [
+        "A) C3 plants are more efficient at CO2 fixation due to lower photorespiration rates, while C4 plants are adapted to hot, dry climates due to their ability to store CO2 as pyruvate.",
+        "B) C4 plants have a higher efficiency of CO2 fixation at high temperatures because they avoid photorespiration by fixing CO2 into a four-carbon compound before entering the Calvin cycle.",
+        "C) C3 plants minimize water loss by storing CO2 as oxaloacetate, which allows them to keep their stomata closed during the hottest part of the day.",
+        "D) Both C3 and C4 plants exhibit high rates of photorespiration, but C4 plants are more efficient at regenerating ribulose-1,5-bisphosphate for continuous carbon fixation."
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following explains why Rubisco is referred to as a 'big hairy ugly enzyme' despite its essential role in carbon fixation?",
+    options: [
+        "A) Rubisco's structure includes numerous complex subunits that allow for rapid CO2 fixation but make it prone to frequent misfolding.",
+        "B) Rubisco is inefficient and slow, often binding to oxygen instead of CO2, leading to a wasteful process called photorespiration, but it is still the most abundant and essential enzyme for carbon fixation.",
+        "C) Rubisco is responsible for the breakdown of glucose molecules, which makes it slow and inefficient, but it is the only enzyme capable of catalyzing the Calvin cycle reactions.",
+        "D) Rubisco is slow to bind CO2 at low temperatures, making it a limiting factor in photosynthesis for cold-weather plants, despite its importance in high-temperature environments."
+    ],
+    correct: 1
+},
+{
+    question: "What role does chlorophyll play in the light reactions, and why are different pigments necessary for efficient photosynthesis?",
+    options: [
+        "A) Chlorophyll a and b absorb green light, which provides the highest energy for exciting electrons and driving ATP synthesis.",
+        "B) Chlorophyll absorbs light energy and transfers it to the electron transport chain, while other pigments capture a broader spectrum of light to increase overall energy capture.",
+        "C) Chlorophyll absorbs all wavelengths of light but is most effective at driving water splitting reactions to release oxygen and produce protons for ATP synthesis.",
+        "D) Chlorophyll captures blue and red wavelengths, while other pigments like carotenoids capture green wavelengths, enabling continuous energy production in varying light conditions."
+    ],
+    correct: 1
+},
+{
+    question: "How does the cyclic electron flow pathway differ from the linear electron flow in photosynthesis, and what is its main purpose?",
+    options: [
+        "A) Cyclic electron flow generates ATP without the production of NADPH or oxygen, helping to balance the ATP/NADPH ratio required for the Calvin cycle.",
+        "B) Cyclic electron flow generates NADPH and ATP by recycling electrons between Photosystem I and the cytochrome complex, increasing photosynthetic efficiency in high light conditions.",
+        "C) Cyclic electron flow produces NADPH but not ATP, allowing the plant to maximize carbon fixation during the Calvin cycle.",
+        "D) Cyclic electron flow generates oxygen without the need for ATP or NADPH, maintaining redox balance in the chloroplast."
+    ],
+    correct: 0
+},
+{
+    question: "What is the purpose of the stomata in plant leaves, and why must they be regulated during photosynthesis?",
+    options: [
+        "A) Stomata control the entry of CO2 and exit of water vapor, and they must remain closed during the day to prevent excessive water loss while allowing oxygen to enter.",
+        "B) Stomata facilitate the entry of oxygen and the exit of CO2, and they are regulated to maximize CO2 fixation during periods of high light intensity.",
+        "C) Stomata allow the exchange of gases, letting CO2 in and oxygen out, but must be regulated to prevent water loss during photosynthesis, especially in hot, dry environments.",
+        "D) Stomata allow for the release of excess water and the uptake of glucose, ensuring proper regulation of photosynthetic by-products."
+    ],
+    correct: 2
+},
+{
+    question: "Which of the following best explains how ATP synthesis is coupled to the electron transport chain in the light reactions of photosynthesis?",
+    options: [
+        "A) Protons are pumped into the thylakoid lumen as electrons pass through Photosystem I, creating a gradient that drives ATP synthesis through ATPase.",
+        "B) Electrons passing through Photosystem II are used to drive the splitting of water, producing ATP directly as protons accumulate in the stroma.",
+        "C) The movement of electrons through the cytochrome complex pumps protons into the thylakoid lumen, and their subsequent flow back into the stroma powers ATP synthesis through ATP synthase.",
+        "D) ATP is synthesized when electrons are transferred from Photosystem II to NADP+, generating a proton gradient that drives ATP synthesis via proton pumps."
+    ],
+    correct: 2
+},
+{
+    question: "What is the significance of the Z-scheme in photosynthesis, and how does it enhance the overall efficiency of light energy capture?",
+    options: [
+        "A) The Z-scheme describes the movement of electrons through the Calvin cycle, providing a model for the production of glucose and the release of oxygen in C3 plants.",
+        "B) The Z-scheme represents the linear flow of electrons from Photosystem I to Photosystem II, enabling the efficient production of NADPH and ATP through multiple photon absorption events.",
+        "C) The Z-scheme refers to the pathway by which electrons flow from Photosystem II to Photosystem I, allowing for both ATP and NADPH production as electrons are excited twice to higher energy levels.",
+        "D) The Z-scheme depicts the flow of protons from the stroma to the thylakoid lumen, powering ATP synthase through a cyclic process that enhances oxygen release."
+    ],
+    correct: 2
+},
+{
+    question: "Which statement best explains the role of carotenoids in photosynthesis?",
+    options: [
+        "A) Carotenoids capture photons in the green wavelength, increasing the efficiency of photosynthesis by supplementing the action of chlorophyll a.",
+        "B) Carotenoids protect the photosynthetic apparatus by dissipating excess energy as heat, preventing damage from high-intensity light conditions.",
+        "C) Carotenoids store energy in the form of ATP during periods of low light intensity, maintaining the plant's energy balance.",
+        "D) Carotenoids participate in the electron transport chain, facilitating the transfer of electrons from Photosystem II to Photosystem I."
+    ],
+    correct: 1
+},
+{
+    question: "Why is the enzyme Rubisco considered inefficient, and how do plants overcome its limitations?",
+    options: [
+        "A) Rubisco's affinity for oxygen over CO2 makes it slow to catalyze carbon fixation, but plants with specialized CO2-concentrating mechanisms like C4 and CAM plants can reduce photorespiration and increase efficiency.",
+        "B) Rubisco's tendency to bind to oxygen instead of CO2 leads to the wasteful process of photorespiration, but plants overcome this limitation by generating more ATP during light reactions.",
+        "C) Rubisco is prone to structural changes at high temperatures, slowing its carbon fixation rate, but plants produce more glucose to compensate for this inefficiency.",
+        "D) Rubisco's binding site for CO2 and oxygen is highly competitive, causing it to fix CO2 slowly, but plants increase their stomatal opening to compensate."
+    ],
+    correct: 0
+},
+{
+    question: "How do thylakoid membranes contribute to the organization of the light reactions, and what role do they play in energy production?",
+    options: [
+        "A) Thylakoid membranes contain chlorophyll and other pigments that absorb light energy and transfer it to ATP synthase for direct ATP production.",
+        "B) Thylakoid membranes provide the structural foundation for the light-harvesting complexes, which capture and funnel light energy to Photosystem I and II, facilitating electron transfer and ATP synthesis.",
+        "C) Thylakoid membranes act as a barrier that prevents the backflow of protons into the stroma, ensuring the continuous production of NADPH through Photosystem II.",
+        "D) Thylakoid membranes store NADPH and ATP produced during the light reactions, maintaining a supply of energy for the Calvin cycle during the night."
+    ],
+    correct: 1
+},
+{
+    question: "Why do plants close their stomata in response to hot, dry conditions, and what effect does this have on photosynthesis?",
+    options: [
+        "A) Plants close their stomata to conserve water, but this limits CO2 intake, reducing the rate of photosynthesis and increasing the likelihood of photorespiration.",
+        "B) Plants close their stomata to reduce oxygen loss, but this decreases carbon fixation, causing a buildup of glucose in the stroma.",
+        "C) Plants close their stomata to prevent excess energy loss during high light intensity, reducing ATP production and slowing the Calvin cycle.",
+        "D) Plants close their stomata to maintain water balance, but this increases ATP production, enhancing the rate of photosynthesis."
+    ],
+    correct: 0
+},
+{
+    question: "What is the ultimate source of energy for most life on Earth, and how is it made biologically useful?",
+    options: [
+        "A) The Earth’s core provides energy for biological systems through heat",
+        "B) The Sun provides radiant energy, which plants convert into biologically useful energy through photosynthesis",
+        "C) Energy is created by the organisms themselves via cellular respiration",
+        "D) Energy comes primarily from volcanic activity, which organisms convert into glucose"
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following is true about autotrophic and heterotrophic organisms?",
+    options: [
+        "A) Autotrophs rely on other organisms for their energy, while heterotrophs produce their own energy",
+        "B) Autotrophs capture energy from sunlight, converting it into carbohydrates, while heterotrophs get their energy from consuming other organisms",
+        "C) Both autotrophs and heterotrophs produce their energy solely through cellular respiration",
+        "D) Heterotrophs convert radiant energy directly into chemical energy"
+    ],
+    correct: 1
+},
+{
+    question: "What is the main role of marine algae in the Earth's atmosphere?",
+    options: [
+        "A) Fixing nitrogen for land plants",
+        "B) Providing the majority of atmospheric oxygen through photosynthesis",
+        "C) Regulating ocean temperatures by absorbing sunlight",
+        "D) Decomposing dead organic matter in the ocean"
+    ],
+    correct: 1
+},
+{
+    question: "Why is photosynthesis considered an inefficient process, and what percentage of sunlight is typically used by plants?",
+    options: [
+        "A) Photosynthesis converts about 50% of sunlight into chemical energy",
+        "B) Only about 3-6% of the sunlight that hits plants is used in photosynthesis",
+        "C) Photosynthesis is inefficient because it requires a lot of energy to split water molecules, using around 80% of sunlight",
+        "D) The inefficiency is due to plants reflecting all light except the green wavelengths, using about 90% of available sunlight"
+    ],
+    correct: 1
+},
+{
+    question: "What is the significance of the pigment chlorophyll in the photosynthesis process?",
+    options: [
+        "A) It reflects all light except green, allowing plants to conserve energy",
+        "B) Chlorophyll absorbs light energy at specific wavelengths, particularly in the red and blue parts of the spectrum",
+        "C) Chlorophyll captures carbon dioxide from the atmosphere",
+        "D) It breaks down water molecules to release oxygen during the light-independent reactions"
+    ],
+    correct: 1
+},
+{
+    question: "What is the function of the thylakoid membrane in chloroplasts?",
+    options: [
+        "A) It captures sunlight and directly converts it into glucose",
+        "B) It stores carbon dioxide for the Calvin cycle",
+        "C) It contains pigments and is the site of the light reactions, where ATP and NADPH are produced",
+        "D) It serves as the location where oxygen is fixed from the air"
+    ],
+    correct: 2
+},
+{
+    question: "Why do plants have specialized structures like sun leaves and shade leaves?",
+    options: [
+        "A) To absorb all wavelengths of light equally throughout the day",
+        "B) To regulate the amount of light exposure, with sun leaves being smaller and less chlorophyll-rich, while shade leaves are larger and contain more chlorophyll",
+        "C) To store energy in the form of starch",
+        "D) To regulate the opening and closing of stomata during photosynthesis"
+    ],
+    correct: 1
+},
+{
+    question: "What is the primary role of rubisco in the Calvin cycle?",
+    options: [
+        "A) It fixes oxygen into organic molecules in the absence of carbon dioxide",
+        "B) It fixes carbon dioxide to a five-carbon sugar, initiating the Calvin cycle",
+        "C) It generates ATP during the light reactions",
+        "D) It splits water molecules to release oxygen"
+    ],
+    correct: 1
+},
+{
+    question: "Why is rubisco considered an inefficient enzyme?",
+    options: [
+        "A) It requires high energy levels to function and sometimes works in reverse, releasing carbon dioxide instead of fixing it",
+        "B) It binds only to oxygen, making it unusable in carbon dioxide-rich environments",
+        "C) It can only function in the dark, limiting photosynthesis to nighttime",
+        "D) It produces glucose too slowly for efficient energy production"
+    ],
+    correct: 0
+},
+{
+    question: "How do C4 plants adapt to hot, dry environments compared to C3 plants?",
+    options: [
+        "A) C4 plants store carbon dioxide as malate and perform the Calvin cycle in bundle sheath cells to reduce water loss",
+        "B) C4 plants open their stomata only at night to conserve water",
+        "C) C4 plants use oxygen instead of carbon dioxide in the Calvin cycle",
+        "D) C4 plants grow smaller leaves to minimize sun exposure"
+    ],
+    correct: 0
+},
+{
+    question: "What is the role of water in the light reactions of photosynthesis?",
+    options: [
+        "A) Water serves as the final electron acceptor in the electron transport chain",
+        "B) Water provides electrons to replace those lost by chlorophyll in Photosystem II, and protons for ATP synthesis",
+        "C) Water acts as the substrate for rubisco in the Calvin cycle, contributing to glucose formation",
+        "D) Water is used to capture light energy in the form of NADPH"
+    ],
+    correct: 1
+},
+{
+    question: "In what way do plants use the energy generated by the light reactions to drive the Calvin cycle?",
+    options: [
+        "A) ATP and NADPH produced by the light reactions provide the energy and reducing power to convert carbon dioxide into glucose",
+        "B) The energy from the light reactions is stored in the form of glucose, which then powers the Calvin cycle",
+        "C) Light energy drives the conversion of oxygen into carbon dioxide in the Calvin cycle",
+        "D) ATP is used to split water molecules in the Calvin cycle, releasing carbon dioxide"
+    ],
+    correct: 0
+},
+{
+    question: "How do plants control water loss while still allowing for photosynthesis?",
+    options: [
+        "A) By using C4 metabolism to store carbon dioxide as oxaloacetate, reducing the need to open stomata frequently",
+        "B) By storing water in chloroplasts to directly fuel the light reactions",
+        "C) By increasing the size of their stomata in high humidity environments to maximize gas exchange",
+        "D) By closing their stomata completely during photosynthesis to prevent water loss"
+    ],
+    correct: 0
+},
+{
+    question: "Which of the following correctly describes the electron transport chain in Photosystem II?",
+    options: [
+        "A) Electrons are passed from PSII to PSI, generating a proton gradient that is used for ATP production",
+        "B) Electrons are passed directly to NADP+ to form NADPH",
+        "C) Electrons from PSII are used to fix carbon dioxide in the Calvin cycle",
+        "D) Electrons from PSII are recycled back into PSII after passing through PSI"
+    ],
+    correct: 0
+},
+{
+    question: "Why is the thylakoid membrane essential for photosynthesis?",
+    options: [
+        "A) It acts as the location for chloroplast DNA replication",
+        "B) It provides the surface where light-dependent reactions occur, creating a proton gradient for ATP synthesis",
+        "C) It stores the energy absorbed from sunlight until it is needed in the Calvin cycle",
+        "D) It allows carbon dioxide to diffuse into the chloroplast, where it is used in the Calvin cycle"
+    ],
+    correct: 1
+},
+{
+    question: "What is the significance of the different pigments in plant leaves?",
+    options: [
+        "A) Each pigment absorbs all wavelengths of light equally, maximizing energy absorption",
+        "B) Different pigments absorb light at different wavelengths, enabling plants to capture a broader spectrum of light energy",
+        "C) Pigments primarily function to reflect sunlight and protect the plant from overheating",
+        "D) Pigments are involved in the transport of water throughout the plant"
+    ],
+    correct: 1
+},
+{
+    question: "Why is Photosystem II necessary for oxygen production during photosynthesis?",
+    options: [
+        "A) It catalyzes the breakdown of glucose into oxygen and carbon dioxide",
+        "B) It splits water molecules to replace electrons lost by chlorophyll, releasing oxygen as a byproduct",
+        "C) It captures carbon dioxide from the atmosphere and converts it into oxygen",
+        "D) It reduces oxygen to produce ATP"
+    ],
+    correct: 1
+},
+{
+    question: "How do C4 plants differ from C3 plants in their adaptation to hot, dry environments?",
+    options: [
+        "A) C4 plants fix carbon dioxide directly into a four-carbon molecule, reducing water loss by minimizing stomatal opening",
+        "B) C4 plants open their stomata at night to minimize water loss while maximizing CO2 uptake",
+        "C) C4 plants store carbon dioxide as malate, allowing for continuous photosynthesis without water",
+        "D) C4 plants rely entirely on rubisco for CO2 fixation, but in bundle sheath cells rather than mesophyll cells"
+    ],
+    correct: 0
+},
+{
+    question: "What is the primary function of the cytochrome complex in photosynthesis?",
+    options: [
+        "A) It transports electrons from Photosystem II to Photosystem I",
+        "B) It splits water molecules to produce oxygen",
+        "C) It synthesizes ATP from ADP and Pi",
+        "D) It transports NADPH to the Calvin cycle"
+    ],
+    correct: 0
+},
+{
+    question: "Why is rubisco considered a slow and inefficient enzyme?",
+    options: [
+        "A) Rubisco binds to oxygen as well as carbon dioxide, which can lead to photorespiration, wasting energy",
+        "B) Rubisco has low specificity for carbon dioxide and can only fix one molecule per minute",
+        "C) Rubisco is inhibited by the products of the Calvin cycle, leading to decreased efficiency",
+        "D) Rubisco requires direct sunlight to function, limiting its activity to daylight hours"
+    ],
+    correct: 0
+},
+{
+    question: "What is the role of stomata in leaf structure, and how do plants control their opening and closing?",
+    options: [
+        "A) Stomata are pores that allow oxygen to enter the leaf for cellular respiration; their opening is controlled by water levels in the roots",
+        "B) Stomata allow carbon dioxide to enter and oxygen to exit; they open during high humidity and close to conserve water in dry conditions",
+        "C) Stomata are the sites of ATP synthesis in the chloroplast; their function is regulated by sunlight",
+        "D) Stomata are controlled by rubisco, which dictates when carbon dioxide enters the leaf"
+    ],
+    correct: 1
+},
+{
+    question: "What is the significance of the Calvin cycle being a ‘dark reaction’?",
+    options: [
+        "A) It occurs at night, independent of light, allowing plants to continue photosynthesis after the sun has set",
+        "B) It does not require light directly, but it uses the products (ATP and NADPH) from the light reactions to fix carbon into sugars",
+        "C) It involves the splitting of water molecules in the absence of light",
+        "D) It relies on mitochondrial energy instead of the products from light reactions"
+    ],
+    correct: 1
+},
+{
+    question: "What is the key structural difference between C3 and C4 plants that allows C4 plants to photosynthesize more efficiently in arid conditions?",
+    options: [
+        "A) C4 plants have chloroplasts that are less dependent on sunlight, reducing water loss",
+        "B) C4 plants concentrate CO2 in bundle sheath cells, reducing the interaction between rubisco and oxygen",
+        "C) C4 plants have a thicker waxy cuticle that prevents water loss during photosynthesis",
+        "D) C4 plants use specialized stomata that allow for CO2 uptake at night"
+    ],
+    correct: 1
+},
+{
+    question: "Why do CAM plants open their stomata at night?",
+    options: [
+        "A) To maximize carbon dioxide uptake while minimizing water loss during cooler, more humid conditions",
+        "B) To allow oxygen to escape from the plant and reduce photorespiration",
+        "C) To absorb sunlight more efficiently by reflecting cooler wavelengths of light",
+        "D) To conserve ATP during the light-dependent reactions"
+    ],
+    correct: 0
+},
+{
+    question: "How does the wavelength of light impact the energy available for photosynthesis?",
+    options: [
+        "A) Longer wavelengths have more energy and are more effective at driving photosynthesis",
+        "B) Shorter wavelengths have higher energy but are less effective due to their inability to penetrate the chloroplast",
+        "C) Shorter wavelengths have more energy, providing more effective excitation of electrons in chlorophyll molecules",
+        "D) Wavelength has no significant impact on the energy used by plants for photosynthesis"
+    ],
+    correct: 2
+},
+{
+    question: "What is the primary purpose of the antenna complex in photosystems?",
+    options: [
+        "A) To synthesize glucose by capturing carbon dioxide",
+        "B) To transfer light energy between pigment molecules until it reaches the reaction center",
+        "C) To convert water into oxygen and protons",
+        "D) To capture light energy and store it as ATP"
+    ],
+    correct: 1
+},
+{
+    question: "What is the effect of photorespiration on plant efficiency, and why does it occur?",
+    options: [
+        "A) Photorespiration increases plant efficiency by using excess oxygen in the Calvin cycle",
+        "B) Photorespiration wastes energy and reduces carbon fixation, occurring when rubisco binds oxygen instead of carbon dioxide",
+        "C) Photorespiration enhances the production of ATP by recycling oxygen back into the light reactions",
+        "D) Photorespiration is necessary for the regeneration of NADP+ in the absence of light"
+    ],
+    correct: 1
+},
+{
+    question: "What is the function of manganese in Photosystem II?",
+    options: [
+        "A) Manganese captures carbon dioxide for fixation in the Calvin cycle",
+        "B) Manganese is responsible for splitting water molecules and releasing oxygen during the light reactions",
+        "C) Manganese catalyzes the reduction of NADP+ to NADPH",
+        "D) Manganese is involved in the regeneration of rubisco in the Calvin cycle"
+    ],
+    correct: 1
+},
+{
+    question: "Why do plants need to perform both light-dependent and light-independent reactions?",
+    options: [
+        "A) Light-dependent reactions generate ATP and NADPH, which provide the energy and reducing power for the Calvin cycle",
+        "B) Light-independent reactions allow plants to store light energy directly in chlorophyll molecules for later use",
+        "C) Light-dependent reactions produce glucose directly, while light-independent reactions store that energy",
+        "D) Light-independent reactions fix nitrogen, essential for plant growth, using the energy produced by light-dependent reactions"
+    ],
+    correct: 0
+},
+{
+    question: "How do protons contribute to ATP synthesis in the thylakoid membrane?",
+    options: [
+        "A) Protons generated during water splitting are pumped into the stroma, where ATP synthase uses them to convert ADP to ATP",
+        "B) Protons accumulate in the thylakoid lumen, creating a proton gradient that drives ATP synthesis through ATP synthase",
+        "C) Protons directly interact with NADP+ to produce NADPH, which is used in the Calvin cycle",
+        "D) Protons are used to split carbon dioxide into oxygen and glucose"
+    ],
+    correct: 1
+},
+{
+    question: "What is the ultimate source of energy that all life on Earth depends on?",
+    options: [
+        "A) Oxygen produced by plants",
+        "B) Radiant energy from the Sun",
+        "C) Glucose from photosynthesis",
+        "D) Heat from deep-sea vents"
+    ],
+    correct: 1
+},
+{
+    question: "Why is photosynthesis considered the most important set of chemical reactions in the universe?",
+    options: [
+        "A) It converts sunlight into carbon dioxide, allowing animals to breathe",
+        "B) It produces energy in the form of ATP for cellular processes",
+        "C) It fixes radiant energy into a biologically useful form that supports all life on Earth",
+        "D) It creates oxygen through cellular respiration"
+    ],
+    correct: 2
+},
+{
+    question: "How do autotrophic organisms like plants produce their own energy?",
+    options: [
+        "A) By consuming other organisms for energy",
+        "B) By converting radiant energy from the sun into chemical energy, mainly as carbohydrates",
+        "C) By breaking down carbon dioxide in the atmosphere",
+        "D) By utilizing methane and hydrogen sulfide gases from deep-sea vents"
+    ],
+    correct: 1
+},
+{
+    question: "What is the main difference between autotrophic and heterotrophic organisms?",
+    options: [
+        "A) Autotrophic organisms use oxygen for energy, while heterotrophic organisms use sunlight",
+        "B) Autotrophic organisms produce their own energy, while heterotrophic organisms rely on consuming other organisms for energy",
+        "C) Heterotrophic organisms create energy from sunlight, while autotrophic organisms depend on eating plants",
+        "D) Autotrophic organisms respire more efficiently than heterotrophic organisms"
+    ],
+    correct: 1
+},
+{
+    question: "What process is responsible for most of the oxygen produced on Earth?",
+    options: [
+        "A) Photosynthesis by marine algae",
+        "B) Chemosynthesis by deep-sea organisms",
+        "C) Cellular respiration by plants",
+        "D) Carbon fixation by rubisco"
+    ],
+    correct: 0
+},
+{
+    question: "Why is photosynthesis considered inefficient in terms of light energy usage?",
+    options: [
+        "A) Plants use only 10-20% of the total light energy that hits their leaves",
+        "B) Only 3-6% of the light energy that hits plants is used in photosynthesis",
+        "C) Most plants reflect 50% of the light energy that hits their leaves",
+        "D) Plants convert only 1% of light energy into carbohydrates"
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following wavelengths of light carries more energy?",
+    options: [
+        "A) 680 nanometers",
+        "B) 700 nanometers",
+        "C) 750 nanometers",
+        "D) 800 nanometers"
+    ],
+    correct: 0
+},
+{
+    question: "How do sun leaves differ from shade leaves?",
+    options: [
+        "A) Sun leaves are smaller and have less chlorophyll, while shade leaves are larger and have more chlorophyll",
+        "B) Sun leaves are larger and have more chlorophyll, while shade leaves are smaller and have less chlorophyll",
+        "C) Sun leaves reflect more green light, while shade leaves reflect less",
+        "D) Shade leaves are more exposed to sunlight than sun leaves"
+    ],
+    correct: 0
+},
+{
+    question: "What are the roles of xylem and phloem in plant physiology?",
+    options: [
+        "A) Xylem transports carbon dioxide, and phloem transports oxygen",
+        "B) Xylem transports water and minerals, and phloem transports sugars",
+        "C) Xylem stores glucose, and phloem stores oxygen",
+        "D) Both xylem and phloem transport nutrients to plant roots"
+    ],
+    correct: 1
+},
+{
+    question: "Why do plants close their stomata during periods of high temperature or low water availability?",
+    options: [
+        "A) To prevent excess carbon dioxide from escaping",
+        "B) To reduce water loss through transpiration",
+        "C) To increase the absorption of oxygen",
+        "D) To avoid overheating"
+    ],
+    correct: 1
+},
+{
+    question: "How do plants capture light energy during photosynthesis?",
+    options: [
+        "A) Chlorophyll reflects green wavelengths, converting the rest into usable energy",
+        "B) Chloroplast pigments absorb light energy and pass it down to reaction centers like P680 and P700",
+        "C) Pigments such as carotenoids and chlorophyll B store light energy for later use",
+        "D) The thylakoid membrane absorbs sunlight directly into the Calvin cycle"
+    ],
+    correct: 1
+},
+{
+    question: "Which process splits water molecules to replace lost electrons in photosystem II?",
+    options: [
+        "A) Electron Transport Chain",
+        "B) NADPH synthesis",
+        "C) Photolysis using manganese",
+        "D) ATP synthesis"
+    ],
+    correct: 2
+},
+{
+    question: "What is the significance of rubisco in the Calvin cycle?",
+    options: [
+        "A) Rubisco binds oxygen and releases carbon dioxide during respiration",
+        "B) Rubisco binds carbon dioxide to a 5-carbon sugar, initiating glucose formation",
+        "C) Rubisco stores ATP and NADPH for light-dependent reactions",
+        "D) Rubisco catalyzes the breakdown of water into oxygen and hydrogen ions"
+    ],
+    correct: 1
+},
+{
+    question: "Which type of plants open their stomata at night to reduce water loss and store CO2 as malate?",
+    options: [
+        "A) C3 plants",
+        "B) C4 plants",
+        "C) CAM plants",
+        "D) Aquatic plants"
+    ],
+    correct: 2
+},
+{
+    question: "How do C4 plants adapt to hot and dry conditions?",
+    options: [
+        "A) They open their stomata only at night and store CO2 as oxaloacetate",
+        "B) They use bundle sheath cells to perform the dark reactions away from the palisade mesophyll",
+        "C) They store CO2 in vesicles with acidic pH for later use in photosynthesis",
+        "D) They perform photosynthesis exclusively in their shade leaves"
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following events occurs during the G1 phase of the cell cycle?",
+    options: [
+        "A) DNA is synthesized to prepare for cell division",
+        "B) The cell undergoes metabolic growth and prepares materials for DNA synthesis",
+        "C) Chromosomes condense and spindle fibers attach to centromeres",
+        "D) The cell checks for spindle fiber attachment at the metaphase plate"
+    ],
+    correct: 1
+},
+{
+    question: "What is the primary function of the S phase in the cell cycle?",
+    options: [
+        "A) Cell division and separation of sister chromatids",
+        "B) Duplication of organelles and synthesis of proteins for cell division",
+        "C) DNA replication, doubling the genetic material for cell division",
+        "D) Synthesis of ATP and preparation for DNA replication"
+    ],
+    correct: 2
+},
+{
+    question: "What is the role of the G2 checkpoint in the cell cycle?",
+    options: [
+        "A) Ensures that spindle fibers are attached to chromosomes",
+        "B) Checks for DNA damage and ensures adequate resources for mitosis",
+        "C) Activates cyclins and CDKs for progression into the S phase",
+        "D) Initiates DNA replication and histone production"
+    ],
+    correct: 1
+},
+{
+    question: "During the M phase of the cell cycle, what is the major event that takes place?",
+    options: [
+        "A) DNA synthesis and organelle duplication",
+        "B) Cytokinesis and final separation of two daughter cells",
+        "C) Chromosome condensation and spindle fiber attachment",
+        "D) Cell growth and accumulation of energy stores"
+    ],
+    correct: 2
+},
+{
+    question: "What happens to cells that enter the G0 phase of the cell cycle?",
+    options: [
+        "A) They continue to divide at a slower rate than normal",
+        "B) They permanently leave the cell cycle and undergo apoptosis",
+        "C) They exit the cell cycle and do not divide, but may re-enter under certain conditions",
+        "D) They enter mitosis prematurely to complete the cell cycle"
+    ],
+    correct: 2
+},
+{
+    question: "Which of the following is true regarding the function of P53 in the cell cycle?",
+    options: [
+        "A) P53 promotes the transition from G2 to M phase",
+        "B) P53 triggers apoptosis if DNA damage cannot be repaired at the G1 checkpoint",
+        "C) P53 inhibits spindle fiber formation during metaphase",
+        "D) P53 ensures that sufficient ATP is produced for DNA replication"
+    ],
+    correct: 1
+},
+{
+    question: "What happens at the G1 checkpoint in the cell cycle?",
+    options: [
+        "A) The cell checks that spindle fibers are attached to chromosomes",
+        "B) The cell checks for enough energy and proper cell volume for DNA synthesis",
+        "C) The cell synthesizes DNA and prepares for chromosome condensation",
+        "D) The cell ensures that chromosomes are properly aligned at the metaphase plate"
+    ],
+    correct: 1
+},
+{
+    question: "How is CDK (cyclin-dependent kinase) activity regulated in the cell cycle?",
+    options: [
+        "A) CDK is degraded after each cell cycle phase",
+        "B) CDK is activated and inhibited by phosphorylation events",
+        "C) CDK builds up and breaks down in response to cyclin accumulation",
+        "D) CDK activity is controlled by ATP levels in the mitochondria"
+    ],
+    correct: 1
+},
+{
+    question: "What is the main role of the M checkpoint during metaphase?",
+    options: [
+        "A) To check for DNA damage before mitosis",
+        "B) To ensure spindle fibers are properly attached to all chromosomes",
+        "C) To ensure the cell has enough ATP to complete mitosis",
+        "D) To activate the synthesis of cyclins and CDKs"
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following cells typically remain in the G0 phase for the rest of their lifespan?",
+    options: [
+        "A) Epithelial cells in the intestines",
+        "B) Liver cells",
+        "C) Neurons in the brain",
+        "D) Fibroblasts in skin tissue"
+    ],
+    correct: 2
+},
+{
+    question: "What is the relationship between retinoblastoma protein (RB) and E2F in regulating the cell cycle?",
+    options: [
+        "A) RB activates E2F to promote DNA replication during the S phase",
+        "B) RB inhibits E2F, preventing the cell from moving from G1 to S phase",
+        "C) RB degrades cyclins to stop cell cycle progression",
+        "D) RB and E2F work together to initiate cytokinesis"
+    ],
+    correct: 1
+},
+{
+    question: "What occurs if the G1 checkpoint detects DNA damage or inadequate energy reserves?",
+    options: [
+        "A) The cell proceeds to the S phase to replicate DNA",
+        "B) The cell pauses for repair or enters apoptosis if damage is irreparable",
+        "C) The cell continues to divide, leading to cancer",
+        "D) The cell immediately proceeds to the G2 checkpoint"
+    ],
+    correct: 1
+},
+{
+    question: "Which checkpoint is primarily responsible for ensuring the cell has enough materials and energy to proceed with mitosis?",
+    options: [
+        "A) G1 checkpoint",
+        "B) G2 checkpoint",
+        "C) M checkpoint",
+        "D) Cytokinesis checkpoint"
+    ],
+    correct: 1
+},
+{
+    question: "Which protein is primarily involved in the G1 checkpoint and is often mutated in cancer cells?",
+    options: [
+        "A) Cyclin D",
+        "B) P53",
+        "C) E2F",
+        "D) Cyclin-dependent kinase (CDK)"
+    ],
+    correct: 1
+},
+{
+    question: "What happens when cyclins bind to CDKs?",
+    options: [
+        "A) They activate CDK, allowing the cell cycle to progress",
+        "B) They inhibit CDK, stopping the cell cycle",
+        "C) They degrade CDK to prevent further cell division",
+        "D) They initiate DNA replication directly"
+    ],
+    correct: 1
+},
+{
+    question: "What does the G2 checkpoint primarily check before a cell enters mitosis?",
+    options: [
+        "A) Surface area to volume ratio",
+        "B) DNA integrity and complete replication",
+        "C) Proper spindle fiber attachment",
+        "D) Sufficient cyclin degradation"
+    ],
+    correct: 1
+},
+{
+    question: "What is the purpose of programmed cell death (apoptosis) in the cell cycle?",
+    options: [
+        "A) To eliminate cells that have completed mitosis",
+        "B) To remove damaged or unfixable cells that cannot proceed through the cycle",
+        "C) To control energy expenditure during the G1 phase",
+        "D) To prevent the overproduction of CDKs and cyclins"
+    ],
+    correct: 1
+},
+{
+    question: "How do fibroblasts behave in the cell cycle in response to injury?",
+    options: [
+        "A) They remain in the G0 phase and never re-enter the cell cycle",
+        "B) They exit G0 and re-enter the cell cycle to aid in tissue repair",
+        "C) They skip G1 and G2 phases to rapidly divide",
+        "D) They enter mitosis directly without completing the cell cycle"
+    ],
+    correct: 1
+},
+{
+    question: "What is the function of MPF (Mitosis Promoting Factor) in the G2 phase?",
+    options: [
+        "A) It prevents the cell from entering mitosis",
+        "B) It activates CDK and triggers the onset of mitosis",
+        "C) It breaks down cyclins to inhibit mitosis",
+        "D) It phosphorylates RB to inactivate E2F"
+    ],
+    correct: 1
+},
+{
+    question: "What is the consequence of defective P53 function in the cell cycle?",
+    options: [
+        "A) Cells may undergo uncontrolled division leading to cancer",
+        "B) Cells will enter apoptosis prematurely",
+        "C) The G1 checkpoint will never be reached",
+        "D) Mitosis will be permanently halted"
+    ],
+    correct: 1
+},
+{
+    question: "Which phase of the cell cycle involves the synthesis of microtubules and spindle fibers?",
+    options: [
+        "A) G1 phase",
+        "B) S phase",
+        "C) G2 phase",
+        "D) M phase"
+    ],
+    correct: 1
+},
+{
+    question: "Which stage of the cell cycle is responsible for DNA synthesis?",
+    options: [
+        "A) G1",
+        "B) S",
+        "C) G2",
+        "D) M"
+    ],
+    correct: 1
+},
+{
+    question: "During which checkpoint does the cell check for sufficient energy and an intact genome before proceeding with DNA replication?",
+    options: [
+        "A) G2",
+        "B) M",
+        "C) G1",
+        "D) S"
+    ],
+    correct: 0
+},
+{
+    question: "Which of the following proteins is responsible for halting the cell cycle when DNA damage is detected at the G1 checkpoint?",
+    options: [
+        "A) RB",
+        "B) E2F",
+        "C) P53",
+        "D) Cyclin D"
+    ],
+    correct: 2
+},
+{
+    question: "What is the primary function of cyclin-dependent kinases (CDKs) in the cell cycle?",
+    options: [
+        "A) Adding phosphate groups to proteins",
+        "B) Degrading cyclins",
+        "C) Binding to DNA to promote transcription",
+        "D) Regulating mitotic spindle formation"
+    ],
+    correct: 0
+},
+{
+    question: "Which stage of the cell cycle is the shortest in duration?",
+    options: [
+        "A) G1",
+        "B) S",
+        "C) G2",
+        "D) M"
+    ],
+    correct: 3
+},
+{
+    question: "Which protein acts as a transcription factor and initiates the genes responsible for cell progression from G1 to S phase when released from RB?",
+    options: [
+        "A) E2F",
+        "B) MPF",
+        "C) Cyclin B",
+        "D) P53"
+    ],
+    correct: 0
+},
+{
+    question: "At which point in the cell cycle does the G1 checkpoint occur?",
+    options: [
+        "A) After DNA synthesis",
+        "B) Before the cell commits to DNA replication",
+        "C) During metaphase",
+        "D) After mitosis is complete"
+    ],
+    correct: 1
+},
+{
+    question: "What role does RB play in the G1 checkpoint?",
+    options: [
+        "A) Activates E2F to promote DNA replication",
+        "B) Inhibits E2F until phosphorylated by cyclin-CDK complexes",
+        "C) Promotes apoptosis when DNA damage is detected",
+        "D) Stimulates cell division through MPF activation"
+    ],
+    correct: 1
+},
+{
+    question: "What is the primary function of the G2 checkpoint?",
+    options: [
+        "A) Ensuring spindle fibers attach to chromosomes",
+        "B) Ensuring DNA has been replicated correctly",
+        "C) Ensuring cyclin levels are adequate for mitosis",
+        "D) Checking for sufficient cell volume and energy"
+    ],
+    correct: 1
+},
+{
+    question: "Which type of cancer is most commonly associated with mutations in the RB gene?",
+    options: [
+        "A) Breast cancer",
+        "B) Retinoblastoma",
+        "C) Lung cancer",
+        "D) Leukemia"
+    ],
+    correct: 1
+},
+{
+    question: "What process occurs in the M checkpoint?",
+    options: [
+        "A) The cell checks for enough DNA replication",
+        "B) The spindle fibers are checked to ensure proper attachment to the chromosomes",
+        "C) The chromosomes are checked for proper condensation",
+        "D) The nuclear membrane breaks down"
+    ],
+    correct: 1
+},
+{
+    question: "Which kinase is involved in initiating mitosis by activating enzymes that degrade the nuclear membrane?",
+    options: [
+        "A) CDK4",
+        "B) MPF",
+        "C) Cyclin E",
+        "D) RB"
+    ],
+    correct: 1
+},
+{
+    question: "What happens to the cell if a critical issue is detected at any checkpoint and cannot be resolved?",
+    options: [
+        "A) It moves into G0",
+        "B) It undergoes apoptosis",
+        "C) It continues with mitosis regardless",
+        "D) It degrades cyclins and CDKs"
+    ],
+    correct: 1
+},
+{
+    question: "Which phase of the cell cycle involves the growth and preparation of the cell for mitosis by synthesizing ATP and microtubules?",
+    options: [
+        "A) G1",
+        "B) S",
+        "C) G2",
+        "D) M"
+    ],
+    correct: 2
+},
+{
+    question: "What is the role of cyclins in the regulation of the cell cycle?",
+    options: [
+        "A) They are continuously present throughout the cycle",
+        "B) They build up and break down in response to external signals to activate CDKs",
+        "C) They are involved in DNA synthesis",
+        "D) They degrade spindle fibers"
+    ],
+    correct: 1
+},
+{
+    question: "In which phase do cells often enter a resting state known as G0?",
+    options: [
+        "A) G1",
+        "B) S",
+        "C) G2",
+        "D) M"
+    ],
+    correct: 0
+},
+{
+    question: "During the G1 checkpoint, what external signal is necessary for the cell to proceed through the cycle?",
+    options: [
+        "A) Cyclins",
+        "B) MPF",
+        "C) Mitogens",
+        "D) Phosphorylation of CDKs"
+    ],
+    correct: 2
+},
+{
+    question: "What is the primary function of P53 at the G1 checkpoint?",
+    options: [
+        "A) Prevent cell division if DNA is damaged",
+        "B) Promote cell division if DNA is undamaged",
+        "C) Repair damaged spindle fibers",
+        "D) Activate MPF for mitosis"
+    ],
+    correct: 0
+},
+{
+    question: "The breakdown of the nuclear membrane during mitosis is triggered by which complex?",
+    options: [
+        "A) Cyclin-CDK complex",
+        "B) RB-E2F complex",
+        "C) MPF",
+        "D) P53"
+    ],
+    correct: 2
+},
+{
+    question: "What happens when E2F is released from RB?",
+    options: [
+        "A) E2F activates genes for DNA replication",
+        "B) E2F promotes apoptosis",
+        "C) E2F inhibits mitosis",
+        "D) E2F binds to spindle fibers"
+    ],
+    correct: 0
+},
+{
+    question: "Which of the following accurately describes the process at the M checkpoint?",
+    options: [
+        "A) Spindle fibers are checked for proper attachment to chromosomes",
+        "B) DNA is checked for proper replication",
+        "C) The nuclear membrane is checked for breakdown",
+        "D) ATP levels are evaluated"
+    ],
+    correct: 0
+},
+{
+    question: "What enzyme is critical in moving the cell from G2 into mitosis by initiating chromosomal condensation?",
+    options: [
+        "A) RB",
+        "B) MPF",
+        "C) P53",
+        "D) Cyclin D"
+    ],
+    correct: 1
+},
+{
+    question: "Which process ensures that cells do not proceed into the next phase of the cell cycle until they are ready?",
+    options: [
+        "A) Cyclin synthesis",
+        "B) CDK inhibition",
+        "C) Cell cycle checkpoints",
+        "D) Apoptosis"
+    ],
+    correct: 2
+},
+{
+    question: "What does the phosphorylation of RB by a cyclin-CDK complex cause?",
+    options: [
+        "A) It binds to E2F and halts the cell cycle",
+        "B) It releases E2F, allowing progression into S phase",
+        "C) It signals apoptosis",
+        "D) It promotes mitosis"
+    ],
+    correct: 1
+},
+{
+    question: "At which checkpoint does the cell check for sufficient energy and materials to initiate DNA synthesis?",
+    options: [
+        "A) G1",
+        "B) G2",
+        "C) M",
+        "D) S"
+    ],
+    correct: 0
+},
+{
+    question: "What condition would lead a cell to stay in G0 permanently?",
+    options: [
+        "A) ATP levels are low",
+        "B) DNA damage cannot be repaired",
+        "C) External mitogens signal the cell to remain",
+        "D) Cells like neurons permanently enter G0"
+    ],
+    correct: 1
+},
+{
+    question: "If the cell cycle is unregulated and a checkpoint fails, what disease is most likely to result?",
+    options: [
+        "A) Diabetes",
+        "B) Cancer",
+        "C) Alzheimer’s",
+        "D) Cardiovascular disease"
+    ],
+    correct: 1
+},
+{
+    question: "What initiates the cell's progression from G1 to S phase after the restriction point is passed?",
+    options: [
+        "A) Cyclin-CDK activation of E2F",
+        "B) DNA damage repair by P53",
+        "C) The breakdown of the nuclear membrane",
+        "D) Spindle fiber formation"
+    ],
+    correct: 0
+},
+{
+    question: "What molecule is critical for halting the cell cycle at the G1 checkpoint when conditions are not favorable for DNA synthesis?",
+    options: [
+        "A) P53",
+        "B) E2F",
+        "C) MPF",
+        "D) Cyclin B"
+    ],
+    correct: 0
+},
+{
+    question: "Which phase of the cell cycle is the longest in duration?",
+    options: [
+        "A) M",
+        "B) S",
+        "C) G1",
+        "D) G2"
+    ],
+    correct: 2
+},
+{
+    question: "Which proteins are primarily responsible for activating CDKs during different phases of the cell cycle?",
+    options: [
+        "A) Spindle fibers",
+        "B) Cyclins",
+        "C) Laminins",
+        "D) Chromatin"
+    ],
+    correct: 1
+},
+{
+    question: "What effect does P53 mutation have on cancer development?",
+    options: [
+        "A) Accelerates DNA repair",
+        "B) Prevents cell cycle arrest at G1",
+        "C) Stimulates excessive mitosis",
+        "D) Blocks CDK activation"
+    ],
+    correct: 1
+},
+{
+    question: "What happens at the G1 restriction point?",
+    options: [
+        "A) The cell is checked for DNA damage",
+        "B) The spindle fibers attach to chromosomes",
+        "C) Chromosomes are condensed",
+        "D) Laminins break down the nuclear membrane"
+    ],
+    correct: 0
+},
+{
+    question: "What is the result of cyclin binding to CDK during G2?",
+    options: [
+        "A) Chromosomal condensation is initiated",
+        "B) DNA synthesis begins",
+        "C) Apoptosis is triggered",
+        "D) The cell cycle halts"
+    ],
+    correct: 0
+},
+{
+    question: "What ensures that the cell cycle progresses only when conditions are optimal?",
+    options: [
+        "A) Spindle fiber formation",
+        "B) Cell cycle checkpoints",
+        "C) MPF activation",
+        "D) Nuclear membrane breakdown"
+    ],
+    correct: 1
+},
+{
+    question: "How does a hydrophilic signaling molecule typically relay its message from the cell surface to the nucleus?",
+    options: [
+        "A) By directly passing through the lipid bilayer",
+        "B) By activating intracellular receptors",
+        "C) Through a series of transmembrane receptors and second messenger pathways",
+        "D) By degrading in the extracellular matrix"
+    ],
+    correct: 2
+},
+{
+    question: "What role does cyclic AMP (cAMP) play in G protein signaling pathways?",
+    options: [
+        "A) It acts as a primary messenger",
+        "B) It functions as a second messenger to amplify the signal inside the cell",
+        "C) It transports proteins to the nucleus",
+        "D) It binds directly to the DNA"
+    ],
+    correct: 1
+},
+{
+    question: "What is the significance of the RAS pathway in cellular signaling?",
+    options: [
+        "A) It activates apoptosis directly",
+        "B) It transmits signals from the membrane to the nucleus and regulates gene expression",
+        "C) It provides energy for cellular processes",
+        "D) It initiates DNA replication directly"
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following best describes the function of G proteins in cell signaling?",
+    options: [
+        "A) They bind to DNA to regulate transcription",
+        "B) They hydrolyze ATP to provide energy for the cell",
+        "C) They transmit signals from membrane receptors to intracellular effectors",
+        "D) They serve as receptors for hydrophilic hormones"
+    ],
+    correct: 2
+},
+{
+    question: "What is the primary function of the p53 protein in cell cycle regulation?",
+    options: [
+        "A) To promote DNA replication",
+        "B) To initiate apoptosis in response to DNA damage",
+        "C) To stimulate cyclin production",
+        "D) To enhance cell growth signaling"
+    ],
+    correct: 1
+},
+{
+    question: "Which type of receptor is primarily associated with the RAS signaling pathway?",
+    options: [
+        "A) G protein-coupled receptors (GPCRs)",
+        "B) Receptor tyrosine kinases (RTKs)",
+        "C) Ion channel receptors",
+        "D) Intracellular receptors"
+    ],
+    correct: 1
+},
+{
+    question: "What is the consequence of a mutation in the p53 gene?",
+    options: [
+        "A) Increased apoptosis in healthy cells",
+        "B) The inability to stop the cell cycle in response to DNA damage",
+        "C) Enhanced repair mechanisms for damaged DNA",
+        "D) Activation of the RAS signaling pathway"
+    ],
+    correct: 1
+},
+{
+    question: "In the context of cell signaling, what is the primary role of calcium ions?",
+    options: [
+        "A) They serve as a structural component of the cytoskeleton",
+        "B) They act as second messengers in various signaling pathways",
+        "C) They initiate protein synthesis in the nucleus",
+        "D) They deactivate signaling receptors"
+    ],
+    correct: 1
+},
+{
+    question: "What is the primary function of receptor tyrosine kinases (RTKs) in cellular signaling?",
+    options: [
+        "A) To degrade cyclic AMP",
+        "B) To bind hydrophobic signaling molecules",
+        "C) To phosphorylate tyrosine residues on themselves and other proteins",
+        "D) To transport signals across the cell membrane"
+    ],
+    correct: 2
+},
+{
+    question: "What happens when a growth factor binds to its receptor on the cell surface?",
+    options: [
+        "A) The receptor is degraded",
+        "B) The G protein associated with the receptor is activated",
+        "C) The gene is directly activated without any intermediates",
+        "D) The cell immediately enters mitosis"
+    ],
+    correct: 1
+},
+{
+    question: "What signaling pathway is crucial for the regulation of milk production in mammals?",
+    options: [
+        "A) RAS pathway",
+        "B) JAK-STAT pathway",
+        "C) Wnt pathway",
+        "D) Sonic Hedgehog pathway"
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following describes a key function of the Wnt signaling pathway?",
+    options: [
+        "A) Regulating apoptosis in damaged cells",
+        "B) Dictating cell fate during embryonic development",
+        "C) Enhancing DNA repair mechanisms",
+        "D) Promoting glycolysis in cells"
+    ],
+    correct: 1
+},
+{
+    question: "How does the Sonic Hedgehog protein influence embryonic development?",
+    options: [
+        "A) It directs blood vessel formation",
+        "B) It patterns the development of the neural tube",
+        "C) It activates cyclin-dependent kinases",
+        "D) It regulates apoptosis"
+    ],
+    correct: 1
+},
+{
+    question: "What is a major outcome of G protein activation in cell signaling pathways?",
+    options: [
+        "A) Increased cellular respiration",
+        "B) Generation of second messengers such as cAMP",
+        "C) Direct binding to the DNA",
+        "D) Transport of glucose into the cell"
+    ],
+    correct: 1
+},
+{
+    question: "Which molecule is often a target for therapeutic drugs due to its role in many signaling pathways?",
+    options: [
+        "A) Cyclins",
+        "B) G proteins",
+        "C) RNA polymerases",
+        "D) Ribosomes"
+    ],
+    correct: 1
+},
+{
+    question: "What does the RAS protein primarily do once it is activated?",
+    options: [
+        "A) It directly binds to DNA to regulate gene expression",
+        "B) It initiates a phosphorylation cascade involving other kinases",
+        "C) It transports ions across the membrane",
+        "D) It degrades cAMP"
+    ],
+    correct: 1
+},
+{
+    question: "In terms of signal transduction, what is the role of scaffolding proteins?",
+    options: [
+        "A) To inhibit receptor activation",
+        "B) To organize signaling molecules in close proximity for efficient signaling",
+        "C) To transport second messengers across the membrane",
+        "D) To directly activate transcription factors"
+    ],
+    correct: 1
+},
+{
+    question: "What is a common result when signaling pathways are dysregulated?",
+    options: [
+        "A) Enhanced apoptosis",
+        "B) Uncontrolled cell proliferation leading to cancer",
+        "C) Decreased nutrient absorption",
+        "D) Reduced hormone production"
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following best describes the role of p53 in the cellular response to hypoxia?",
+    options: [
+        "A) It activates angiogenesis to improve oxygen supply",
+        "B) It stimulates cell growth despite low oxygen levels",
+        "C) It induces apoptosis to remove damaged cells",
+        "D) It prevents DNA repair mechanisms"
+    ],
+    correct: 0
+},
+{
+    question: "Which of the following statements accurately describes the primary purpose of mitosis?",
+    options: [
+        "A) To produce gametes for sexual reproduction",
+        "B) To facilitate cellular repair and growth",
+        "C) To ensure genetic diversity in offspring",
+        "D) To maintain chromosome number in prokaryotes"
+    ],
+    correct: 1
+},
+{
+    question: "In which cellular process do homologous chromosomes separate?",
+    options: [
+        "A) Mitosis",
+        "B) Meiosis I",
+        "C) Meiosis II",
+        "D) Cytokinesis"
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following correctly describes binary fission in prokaryotic cells?",
+    options: [
+        "A) Involves the separation of duplicated chromosomes",
+        "B) Occurs through a series of stages: prophase, metaphase, anaphase, and telophase",
+        "C) Involves the replication of a circular chromosome followed by division",
+        "D) Requires the formation of a spindle apparatus"
+    ],
+    correct: 2
+},
+{
+    question: "During which phase of the cell cycle does DNA replication occur?",
+    options: [
+        "A) G1 phase",
+        "B) G2 phase",
+        "C) S phase",
+        "D) M phase"
+    ],
+    correct: 2
+},
+{
+    question: "What is the primary role of telomerase in eukaryotic cells?",
+    options: [
+        "A) To synthesize mRNA from DNA",
+        "B) To elongate telomeres during DNA replication",
+        "C) To facilitate mitotic spindle formation",
+        "D) To assist in cytokinesis"
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following best describes heterochromatin?",
+    options: [
+        "A) Active chromatin that participates in transcription",
+        "B) Inactive chromatin that does not code for proteins",
+        "C) Chromatin that is constantly being replicated",
+        "D) Chromatin found only in prokaryotic cells"
+    ],
+    correct: 1
+},
+{
+    question: "What is a Barr body?",
+    options: [
+        "A) An inactivated X chromosome in female mammals",
+        "B) A type of euchromatin",
+        "C) The centromere of a chromosome",
+        "D) A specific type of telomere"
+    ],
+    correct: 0
+},
+{
+    question: "The enzyme separase is crucial during which stage of mitosis?",
+    options: [
+        "A) Prophase",
+        "B) Anaphase",
+        "C) Telophase",
+        "D) Metaphase"
+    ],
+    correct: 1
+},
+{
+    question: "What is the role of the centrosome during mitosis?",
+    options: [
+        "A) It contains the genetic material that is duplicated",
+        "B) It organizes microtubules and forms the spindle apparatus",
+        "C) It assembles the contractile ring during cytokinesis",
+        "D) It produces ATP for energy during cell division"
+    ],
+    correct: 1
+},
+{
+    question: "Which statement best describes the function of cohesin?",
+    options: [
+        "A) Holds chromatids together until anaphase",
+        "B) Facilitates the assembly of the spindle apparatus",
+        "C) Inactivates genes during heterochromatin formation",
+        "D) Replicates DNA during the S phase"
+    ],
+    correct: 0
+},
+{
+    question: "Which of the following occurs during prophase?",
+    options: [
+        "A) Chromosomes are aligned at the equatorial plane",
+        "B) The nuclear membrane begins to re-form",
+        "C) Chromatin condenses into distinct chromosomes",
+        "D) Cytoplasm is divided into two daughter cells"
+    ],
+    correct: 2
+},
+{
+    question: "What distinguishes meiosis from mitosis?",
+    options: [
+        "A) Meiosis produces genetically identical daughter cells",
+        "B) Meiosis involves two rounds of cell division",
+        "C) Meiosis occurs in somatic cells",
+        "D) Meiosis results in diploid cells"
+    ],
+    correct: 1
+},
+{
+    question: "In animal cells, cytokinesis is achieved by:",
+    options: [
+        "A) The formation of a cell plate",
+        "B) The cleavage furrow forming due to actin and myosin contraction",
+        "C) The duplication of centrosomes",
+        "D) The migration of chromatin"
+    ],
+    correct: 1
+},
+{
+    question: "What type of chromatin is typically found at the telomeres?",
+    options: [
+        "A) Euchromatin",
+        "B) Constitutive heterochromatin",
+        "C) Facultative heterochromatin",
+        "D) Active chromatin"
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following structures is primarily responsible for the attachment of spindle fibers during mitosis?",
+    options: [
+        "A) Centromere",
+        "B) Kinetochore",
+        "C) Centrosome",
+        "D) Nuclear membrane"
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following best describes the S phase of the cell cycle?",
+    options: [
+        "A) The phase where the cell grows and prepares for mitosis",
+        "B) The phase where DNA is replicated",
+        "C) The phase where cytokinesis occurs",
+        "D) The phase where the cell exits the cycle"
+    ],
+    correct: 1
+},
+{
+    question: "Which type of protein is involved in the movement of chromosomes during anaphase?",
+    options: [
+        "A) Actin",
+        "B) Kinesin",
+        "C) Cyclin",
+        "D) Myosin"
+    ],
+    correct: 1
+},
+{
+    question: "What occurs during telophase?",
+    options: [
+        "A) Chromosomes condense and become visible",
+        "B) The nuclear envelope reforms around each set of chromosomes",
+        "C) Sister chromatids are pulled apart",
+        "D) The spindle apparatus disassembles"
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following statements about the Hayflick limit is correct?",
+    options: [
+        "A) It refers to the maximum number of divisions for a cancer cell",
+        "B) It indicates the maximum number of times normal somatic cells can divide due to telomere shortening",
+        "C) It is a mechanism that allows prokaryotic cells to divide indefinitely",
+        "D) It only applies to cells that have active telomerase"
+    ],
+    correct: 1
+},
+{
+    question: "The role of shelterin is to:",
+    options: [
+        "A) Protect telomeres from degradation by nucleases",
+        "B) Assist in the condensation of chromatin during mitosis",
+        "C) Facilitate the movement of chromosomes during anaphase",
+        "D) Activate gene transcription in euchromatin"
+    ],
+    correct: 0
+},
+{
+    question: "Which of the following describes the function of the midbody in animal cells?",
+    options: [
+        "A) It assists in the assembly of the spindle apparatus",
+        "B) It is involved in the separation of the two daughter cells during cytokinesis",
+        "C) It produces ribosomal RNA",
+        "D) It stabilizes the nuclear membrane"
+    ],
+    correct: 1
+},
+{
+    question: "What happens to the cohesin protein complex during anaphase?",
+    options: [
+        "A) It is synthesized to hold chromatids together",
+        "B) It is cleaved by separase to allow chromatids to separate",
+        "C) It remains intact to ensure proper chromatid alignment",
+        "D) It migrates to the poles of the cell"
+    ],
+    correct: 1
+},
+{
+    question: "Which statement best describes the function of cyclins in the cell cycle?",
+    options: [
+        "A) They promote the synthesis of DNA during the S phase",
+        "B) They activate cyclin-dependent kinases (CDKs) to regulate the cell cycle",
+        "C) They inhibit the formation of the spindle apparatus",
+        "D) They are involved in the degradation of nucleic acids"
+    ],
+    correct: 1
+},
+{
+    question: "What is the main difference between constitutive and facultative heterochromatin?",
+    options: [
+        "A) Constitutive is active, while facultative is inactive",
+        "B) Constitutive cannot be converted to euchromatin, while facultative can",
+        "C) Constitutive is only found in telomeres, while facultative is not",
+        "D) Constitutive is involved in gene expression, while facultative is not"
+    ],
+    correct: 1
+},
+{
+    question: "Which phase of the cell cycle is characterized by the absence of DNA synthesis?",
+    options: [
+        "A) G1 phase",
+        "B) S phase",
+        "C) G2 phase",
+        "D) M phase"
+    ],
+    correct: 0
+},
+{
+    question: "During which phase do spindle fibers begin to attach to kinetochores?",
+    options: [
+        "A) Prophase",
+        "B) Metaphase",
+        "C) Anaphase",
+        "D) Telophase"
+    ],
+    correct: 0
+},
+{
+    question: "In which stage of meiosis do homologous chromosomes line up at the equatorial plane?",
+    options: [
+        "A) Prophase I",
+        "B) Metaphase I",
+        "C) Anaphase I",
+        "D) Telophase I"
+    ],
+    correct: 1
+},
+{
+    question: "What is the purpose of the G1 checkpoint in the cell cycle?",
+    options: [
+        "A) To ensure DNA is replicated accurately",
+        "B) To check for DNA damage and determine if the cell is ready for division",
+        "C) To promote rapid cell division",
+        "D) To facilitate cytokinesis"
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following processes involves the reduction of chromosome number?",
+    options: [
+        "A) Mitosis",
+        "B) Meiosis I",
+        "C) Meiosis II",
+        "D) Cytokinesis"
+    ],
+    correct: 1
+},
+{
+    question: "What is the result of non-disjunction during meiosis?",
+    options: [
+        "A) Normal gamete formation",
+        "B) Gametes with an abnormal number of chromosomes",
+        "C) Increased genetic diversity",
+        "D) The formation of diploid gametes"
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following statements is true about cytokinesis in plant cells?",
+    options: [
+        "A) It occurs via the formation of a cleavage furrow",
+        "B) It involves the creation of a cell plate from vesicles",
+        "C) It is not essential for cell division",
+        "D) It occurs during metaphase"
+    ],
+    correct: 1
+},
+{
+    question: "What is the significance of crossing over during meiosis?",
+    options: [
+        "A) It results in the separation of sister chromatids",
+        "B) It increases genetic diversity in gametes",
+        "C) It ensures the accurate distribution of chromosomes",
+        "D) It occurs only in male gametes"
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following is a function of the spindle assembly checkpoint?",
+    options: [
+        "A) To promote DNA synthesis",
+        "B) To prevent anaphase until all chromosomes are properly aligned",
+        "C) To trigger apoptosis in damaged cells",
+        "D) To facilitate cytokinesis"
+    ],
+    correct: 1
+},
+{
+    question: "What is the function of the G2 checkpoint?",
+    options: [
+        "A) To check for DNA replication errors and damage before mitosis",
+        "B) To ensure chromosomes are properly aligned during metaphase",
+        "C) To facilitate cytokinesis",
+        "D) To promote cell growth"
+    ],
+    correct: 0
+},
+{
+    question: "Which of the following correctly describes the relationship between chromosomes and chromatids?",
+    options: [
+        "A) Chromatids are single-stranded and form chromosomes during anaphase",
+        "B) Chromatids are identical copies of a chromosome joined at the centromere",
+        "C) Chromosomes are found only during cytokinesis",
+        "D) Chromatids contain different genetic information than their parent chromosome"
+    ],
+    correct: 1
+},
+{
+    question: "During which phase of meiosis does crossing over occur?",
+    options: [
+        "A) Prophase I",
+        "B) Metaphase I",
+        "C) Anaphase I",
+        "D) Telophase I"
+    ],
+    correct: 0
+},
+{
+    question: "What is the main result of meiosis II?",
+    options: [
+        "A) Production of diploid daughter cells",
+        "B) Production of four haploid daughter cells",
+        "C) Replication of DNA",
+        "D) Formation of a zygote"
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following statements about prokaryotic cell division is correct?",
+    options: [
+        "A) It involves mitosis to separate genetic material",
+        "B) It typically occurs through binary fission",
+        "C) It requires the formation of a mitotic spindle",
+        "D) It involves multiple rounds of DNA replication"
+    ],
+    correct: 1
+},
+{
+    question: "The contractile ring during cytokinesis is composed mainly of which type of filament?",
+    options: [
+        "A) Microtubules",
+        "B) Intermediate filaments",
+        "C) Actin filaments",
+        "D) Keratin filaments"
+    ],
+    correct: 2
+},
+{
+    question: "Which of the following describes the relationship between chromatids and chromosomes?",
+    options: [
+        "A) Chromatids are identical copies of a chromosome joined at the centromere",
+        "B) Chromatids contain different genetic information than their parent chromosome",
+        "C) Chromosomes are formed during meiosis but not during mitosis",
+        "D) Chromatids are present only in prokaryotic cells"
+    ],
+    correct: 0
+},
+{
+    question: "During which phase of meiosis do sister chromatids separate?",
+    options: [
+        "A) Anaphase I",
+        "B) Anaphase II",
+        "C) Telophase I",
+        "D) Prophase II"
+    ],
+    correct: 1
+},
+{
+    question: "What is the role of APC (anaphase-promoting complex) in mitosis?",
+    options: [
+        "A) To ensure DNA is replicated accurately",
+        "B) To trigger the separation of sister chromatids",
+        "C) To activate cyclins for cell cycle progression",
+        "D) To form the mitotic spindle"
+    ],
+    correct: 1
+},
+{
+    question: "In eukaryotic cells, what is the structure that forms the nuclear envelope?",
+    options: [
+        "A) The endoplasmic reticulum",
+        "B) The Golgi apparatus",
+        "C) The cytoskeleton",
+        "D) The mitochondria"
+    ],
+    correct: 0
+},
+{
+    question: "Which of the following proteins is primarily responsible for facilitating DNA replication during the S phase?",
+    options: [
+        "A) Topoisomerase",
+        "B) Helicase",
+        "C) Ligase",
+        "D) RNA polymerase"
+    ],
+    correct: 1
+},
+{
+    question: "What is the end product of spermatogenesis?",
+    options: [
+        "A) One diploid sperm cell",
+        "B) Four haploid sperm cells",
+        "C) Two diploid sperm cells",
+        "D) Four diploid sperm cells"
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following is NOT a phase of the cell cycle?",
+    options: [
+        "A) G1 phase",
+        "B) M phase",
+        "C) S phase",
+        "D) R phase"
+    ],
+    correct: 3
+},
+{
+    question: "In humans, how many chromosomes are present in a somatic cell?",
+    options: [
+        "A) 23",
+        "B) 46",
+        "C) 92",
+        "D) 12"
+    ],
+    correct: 1
+},
+{
+    question: "What type of genetic recombination occurs during prophase I of meiosis?",
+    options: [
+        "A) Independent assortment",
+        "B) Crossing over",
+        "C) Mutations",
+        "D) Translocation"
+    ],
+    correct: 1
+},
+{
+    question: "The process of apoptosis can be triggered by:",
+    options: [
+        "A) DNA damage beyond repair",
+        "B) Successful completion of the cell cycle",
+        "C) Nutrient abundance",
+        "D) The presence of growth factors"
+    ],
+    correct: 0
+},
+{
+    question: "What happens during the G2 phase of the cell cycle?",
+    options: [
+        "A) DNA is synthesized",
+        "B) The cell grows and prepares for mitosis",
+        "C) Chromosomes are aligned for division",
+        "D) The nuclear membrane reforms"
+    ],
+    correct: 1
+},
+{
+    question: "Which of the following describes the term 'genetic mosaic'?",
+    options: [
+        "A) An organism with genetically identical cells",
+        "B) An organism with different genetic compositions in different cells",
+        "C) A cell undergoing mitotic division",
+        "D) A method of genetic engineering"
+    ],
+    correct: 1
+},
+{
+    question: "What is the primary purpose of meiosis in sexual reproduction?",
+    options: [
+        "A) To produce genetically identical cells",
+        "B) To create gametes with genetic diversity",
+        "C) To repair damaged tissues",
+        "D) To increase the number of chromosomes in a cell"
+    ],
+    correct: 1
+},
+{
+    question: "Which statement best describes the purpose of checkpoints in the cell cycle?",
+    options: [
+        "A) They allow cells to progress through the cell cycle regardless of damage",
+        "B) They ensure that cells do not divide uncontrollably and can repair DNA if needed",
+        "C) They inhibit the process of DNA replication",
+        "D) They promote rapid cell division for tissue growth"
+    ],
+    correct: 1
+}
+
+    ];
+
+// Render questions
+function renderQuestions() {
+    const quizContainer = document.getElementById('quiz');
+    quizContainer.innerHTML = '';
+
+    questions.forEach((q, index) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'question';
+        questionDiv.innerHTML = `
+            <h2>${index + 1}. ${q.question}</h2>
+            <ul class="options">
+                ${q.options.map((option, i) => `
+                    <li>
+                        <input type="radio" name="q${index}" value="${i}"> ${option}
+                    </li>
+                `).join('')}
+            </ul>
+        `;
+        quizContainer.appendChild(questionDiv);
+    });
+}
+
+// Check answers and display result
+function checkAnswers() {
+    let score = 0;
+
+    questions.forEach((q, index) => {
+        const selectedOption = document.querySelector(`input[name="q${index}"]:checked`);
+        const optionsList = document.querySelectorAll(`input[name="q${index}"]`).forEach(input => {
+            const li = input.parentNode;
+            if (parseInt(input.value) === q.correct) {
+                li.classList.add('correct');
+            } else if (input.checked) {
+                li.classList.add('incorrect');
+            }
+        });
+
+        if (selectedOption && parseInt(selectedOption.value) === q.correct) {
+            score += 1;
+        }
+    });
+
+    const result = document.getElementById('result');
+    result.innerHTML = `You scored ${score} out of ${questions.length}`;
+    result.classList.add('visible');
+}
+
+// Initial rendering of questions
+renderQuestions();
+</script>
+</body>
+
+</html>
